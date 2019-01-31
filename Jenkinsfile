@@ -23,7 +23,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 //sh './jenkins/scripts/deliver.sh'
-                sh 'scp -i /tmp/my.pem centos@localhost:/var/lib/jenkins/workspace/pipelineproject/target/my-app-1.0-SNAPSHOT.jar centos@54.149.242.5:/tmp/'
+                sh 'scp -o StrictHostKeyChecking=no -i /tmp/my.pem centos@localhost:/var/lib/jenkins/workspace/pipelineproject/target/my-app-1.0-SNAPSHOT.jar centos@54.149.242.5:/tmp/'
                 //sh 'ssh -i /tmp/my.pem centos@54.149.242.5:/tmp/my-app-1.0-SNAPSHOT.jar'
             }
         }
