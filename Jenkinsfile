@@ -20,9 +20,10 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') {
+        stage('Deploy') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                //sh './jenkins/scripts/deliver.sh'
+                sh 'java -jar target/sample-app-1.0-SNAPSHOT.jar'
             }
         }
     }
