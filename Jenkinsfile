@@ -40,90 +40,53 @@ pipeline {
 
 
 
-        stage ('Artifactory configuration') {
-
-            steps {
-
-                rtServer (
-
-                    id: "ARTIFACTORY_SERVER",
-
-                    url: "http://35.162.82.35:8081/artifactory/",
-
-                    credentialsId: "8d292339-739e-4cae-8dbd-34a4b974108f"
-
-                )
-
-
-
+        stage('Artifactory Configuration'){
+                steps{
+                    rtServer (
+                     id: "ARTIFACTORY_SERVER"   ,
+                     url: "http://35.162.82.35:8081/artifactory/",
+                     credentialsId: "8d292339-739e-4cae-8dbd-34a4b974108f"
+                    )
+                
+                
                 rtMavenDeployer (
-
                     id: "MAVEN_DEPLOYER",
-
                     serverId: "ARTIFACTORY_SERVER",
-
                     releaseRepo: "libs-release-local",
-
-                    snapshotRepo: "libs-snapshot-local"
-
-                )
-
-
-
-                rtMavenResolver (
-
-                    id: "MAVEN_RESOLVER",
-
-                    serverId: "ARTIFACTORY_SERVER",
-
-                    releaseRepo: "libs-release",
-
-                    snapshotRepo: "libs-snapshot"
-
-                )
-
+                    snapshotRepo:"libs-snapshot-local"
+                    
+                    )
+                    
+                    rtMavenResolver (
+                        id: "MAVEN_RESOLVER",
+                        serverId: "ARTIFACTORY_SERVER",
+                        releaseRepo:"libs-release",
+                        snapshotRepo:"libs-snapshot"
+                        
+                        )
+                }
             }
-
-        }
-
-
-
-        stage ('Exec Maven') {
-
+            
+        stage ('Exec Maven'){
             steps {
-
-                rtMavenRun (
-
-                    tool: "maven", // Tool name from Jenkins configuration
-
+                rtMavenRun(
+                    tool: 'maven3.6.0',
                     pom: 'pom.xml',
-
                     goals: 'clean install',
-
                     deployerId: "MAVEN_DEPLOYER",
-
                     resolverId: "MAVEN_RESOLVER"
-
-                )
-
+                    
+                    )
             }
-
         }
-
-
-
+            
         stage ('Publish build info') {
-
-            steps {
-
+            steps{
                 rtPublishBuildInfo (
-
-                    serverId: "ARTIFACTORY_SERVER"
-
-                )
-
+                        serverId: "ARTIFACTORY_SERVER"
+                    )
             }
-
         }
-    }
+    
+    }    
 }
