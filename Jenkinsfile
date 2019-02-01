@@ -37,13 +37,15 @@ pipeline {
             }
 
         }
-
-stage('sonar') {
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.host.url=http://35.164.31.242:9000 -Dsonar.login=bba851051e781d45abceee2474eea8df2e0e6a37'
-            }
-}
-    
+         stage('SonarQube analysis') {
+                steps{
+                        withSonarQubeEnv('sonar') {
+                        // requires SonarQube Scanner for Maven 3.2+
+                        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+                        }
+                    }
+            } 
+   
         stage('Artifactory Configuration'){
                 steps{
                     rtServer (
