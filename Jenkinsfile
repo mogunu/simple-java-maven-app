@@ -23,8 +23,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 //sh './jenkins/scripts/deliver.sh'
-                sh 'scp -o StrictHostKeyChecking=no -i /tmp/my.pem target/my-app-1.0-SNAPSHOT.jar centos@54.149.242.5:/tmp/'
-                sh 'ssh -i /tmp/my.pem centos@54.149.242.5 java -jar /tmp/my-app-1.0-SNAPSHOT.jar'
+                sh 'scp -o StrictHostKeyChecking=no -i /tmp/my.pem target/my-app-1.0-SNAPSHOT.jar centos@34.217.29.143:/tmp/'
+                sh 'ssh -i /tmp/my.pem centos@34.217.29.143 java -jar /tmp/my-app-1.0-SNAPSHOT.jar'
             }
         }
         
@@ -55,7 +55,7 @@ stage('Sonarqube') {
                 steps{
                     rtServer (
                      id: "ARTIFACTORY_SERVER"   ,
-                     url: "http://35.162.82.35:8081/artifactory",
+                     url: "http://35.164.31.242:8081/artifactory",
                      credentialsId: "artifactory"
                     )
                 
