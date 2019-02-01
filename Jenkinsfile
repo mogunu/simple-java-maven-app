@@ -39,9 +39,9 @@ pipeline {
         }
 
 stage('Static Code Analysis'){
-    sonar:sonar \
-  -Dsonar.host.url=http://35.164.31.242:9000 \
-  -Dsonar.login=bba851051e781d45abceee2474eea8df2e0e6a37
+    sonar:sonar 
+  -Dsonar.host.url="http://35.164.31.242:9000"
+  -Dsonar.login="bba851051e781d45abceee2474eea8df2e0e6a37"
   }
         stage('Artifactory Configuration'){
                 steps{
