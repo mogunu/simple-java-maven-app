@@ -8,7 +8,7 @@
    stage('Setup') {
             steps {
                 script {
-                    startZap(host: "127.0.0.1", port: 8080, timeout:10500, zapHome: "/opt/zaproxy", sessionPath:"~/workspace/pipeline/session.session", allowedHosts:['github.com'])
+                    startZap(host: "127.0.0.1", port: 8080, timeout:10500, zapHome: "/opt/zaproxy", sessionPath:"~/session.session", allowedHosts:['github.com'])
                 }
             }
         }
