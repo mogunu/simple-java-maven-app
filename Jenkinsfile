@@ -29,16 +29,10 @@ pipeline {
         }
         
         stage ('Clone') {
-
             steps {
-
                 git branch: 'master', url: "https://github.com/mogunu/simple-java-maven-app.git"
-
             }
-
         }
-            }
+          }
         }
     
-    }    
-}
