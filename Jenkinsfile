@@ -20,13 +20,6 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
-            steps {
-                //sh './jenkins/scripts/deliver.sh'
-                //sh 'scp -o StrictHostKeyChecking=no -i /tmp/my.pem target/my-app-1.0-SNAPSHOT.jar centos@34.217.29.143:/tmp/'
-                //sh 'ssh -i /tmp/my.pem centos@34.217.29.143 java -jar /tmp/my-app-1.0-SNAPSHOT.jar'
-            }
-        }
         
         stage ('Clone') {
             steps {
